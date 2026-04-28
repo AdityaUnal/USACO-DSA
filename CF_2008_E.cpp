@@ -60,10 +60,6 @@ int main()
                 }
             }
             for(int i = 0;i < n;i +=1){
-                // cout<<i<<" : "<<findmin(preOdd)+findmin(preEven)+findmin(postOdd[i])+findmin(postEven[i]) + 1<<endl;
-                // cout<<i<<" : "<<findmin(preOdd)<<" "<<findmin(preEven)<<" "<<findmin(postOdd[i])<<" "<<findmin(postEven[i])<<endl;
-                // cout<<i<<" : "<<printArray(preOdd)<<printArray(preEven)<<printArray(postOdd[i])<<printArray(postEven[i])<<endl;
-                // cout<<i<<" : ";
                 res = min(res,findmin(addArray(preOdd,postEven[i]))+findmin(addArray(preEven, postOdd[i])) + 1);
                 if(i%2){
                     preOdd[s[i] - 'a'] +=1;
@@ -87,14 +83,9 @@ int main()
                     even[s[i]-'a'] +=1;
                 }
             }
-            // results.push_back(findmin(odd) + findmin(even));
             cout<<findmin(odd) + findmin(even)<<endl;
         }
         T--;
     }
-    // cout<<"Results :"<<endl;
-    // for(int i:results){
-    //     cout<<i<<endl;
-    // }
     return 0;
 }

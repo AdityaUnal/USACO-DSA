@@ -1,51 +1,33 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int MOD = 998244353;
+long long MOD = 998244353;
 
 int main()
 {
-    int T = 1;
+    long long T = 1;
     // cin>>T;
     while(T){
-        int n;
+        long long n;
         cin>>n;
 
-        vector<int> arr(n);
-        for(int i=0;i<n;i++){
+        vector<long long> arr(n);
+        for(long long i=0;i<n;i++){
             cin>>arr[i];
-            arr[i] = arr[i]%n;
+            // arr[i] = arr[i]%n;
         }
-
-        vector<int> prefixSum(n + 1, 0);
-        unordered_map<long long, int> mp;
+        vector<long long> mods(n,0);
+        mods[0] = 1;
         long long ans = 0;
-        // mp[0] = 1;
-        for(int i = 0;i < n;i +=1){
-            mp[(prefixSum[i]%n)] += 1;
-            prefixSum[i + 1] = (prefixSum[i] + arr[i])%n;
-            int currSum = prefixSum[i] + arr[i];
-            int currSumMod = currSum%n;
-            if(mp.find(currSumMod) != mp.end()){
-                ans += mp[currSumMod];
-            }
-            else if(currSumMod != 0 and mp.find((n - currSumMod)%n) != mp.end() ){
-                ans += mp[(n - currSumMod)%n];
-            }
-            // if(mp.find(-(currSum%n)) != mp.end() ){
-            //     ans += mp[-(currSum%n)];
-            // }
-            // if(mp.find(-(currSum%n)) != mp.end() and (currSum%n) != 0){
-            //     ans += mp[-(currSum%n)];
-            // }
-            // cout<<i<<" : ";
-            // for(auto j:mp){
-            //     cout<<j.first<<" "<<j.second<<" ; ";
-            // }
-            // cout<<endl;
-            // cout<<"ans : "<<ans<<endl;
+        long long sum = 0;
+        for(long long i = 0;i < n;i +=1){
+            sum = (sum + arr[i])%n;
+            sum = ((sum)%n + n)%n;
+            mods[sum] +=1;
         }
-        
+        for(long long i:mods){
+            ans += (i*(i - 1))/2;
+        }
         cout<<ans<<endl;
         T--;
     }
